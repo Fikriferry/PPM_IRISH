@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\ProductController;
 
 
 
@@ -20,9 +21,10 @@ Route::get('checkout', [HomepageController::class, 'checkout']);
 
 Route::group(['prefix'=>'dashboard'], function(){
     Route::get('/',[DashboardController::class,'index'])->name('dashboard');
-
     Route::resource('categories',ProductCategoryController::class);
-    Route::get('products',[DashboardController::class,'products'])->name('products');
+    Route::get('/dashboard/products-alias', fn() => redirect()->route('products.index'))->name('products');
+    Route::resource('products', ProductController::class);
+    // Route::get('products',[DashboardController::class,'products'])->name('products');
 
 })->middleware(['auth', 'verified']);
 
