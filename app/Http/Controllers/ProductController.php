@@ -8,13 +8,13 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    
+
     public function index(Request $request)
     {
         $products = Product::query()
             ->when($request->filled('q'), function ($query) use ($request) {
                 $query->where('name', 'like', '%' . $request->q . '%')
-                      ->orWhere('sku', 'like', '%' . $request->q . '%');
+                    ->orWhere('sku', 'like', '%' . $request->q . '%');
             })
             ->paginate(10);
 
@@ -46,22 +46,37 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'product_category_id' => 'nullable|exists:product_categories,id',
-            'image_url' => 'nullable|url',
-            'is_active' => 'boolean'
+            'is_active' => 'nullable|boolean'
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->with([
-                'errors' => $validator->errors(),
-                'errorMessage' => 'Validasi Error, silakan periksa kembali.'
-            ]);
+            return redirect()->back()
+                ->withErrors($validator) // ini penting agar error bisa ditampilkan di view
+                ->withInput() // agar data sebelumnya tidak hilang
+                ->with('errorMessage', 'Validasi Error, silakan periksa kembali.');
         }
+
 
         $product = new Product();
         $product->fill($request->only([
-            'name', 'slug', 'description', 'sku', 'price', 'stock',
-            'product_category_id', 'image_url', 'is_active'
+            'name',
+            'slug',
+            'description',
+            'sku',
+            'price',
+            'stock',
+            'product_category_id',
+            'is_active'
         ]));
+
+        $data['is_active'] = filter_var($request->input('is_active'), FILTER_VALIDATE_BOOLEAN);
+        
+        if ($request->hasFile('image_url')) {
+            $image = $request->file('image_url');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $imagePath = $image->storeAs('uploads/product', $imageName, 'public');
+            $product->image = $imagePath;
+        }
         $product->save();
 
         return redirect()->route('products.index')->with('successMessage', 'Produk berhasil disimpan');
@@ -113,8 +128,15 @@ class ProductController extends Controller
 
         $product = Product::findOrFail($id);
         $product->fill($request->only([
-            'name', 'slug', 'description', 'sku', 'price', 'stock',
-            'product_category_id', 'image_url', 'is_active'
+            'name',
+            'slug',
+            'description',
+            'sku',
+            'price',
+            'stock',
+            'product_category_id',
+            'image_url',
+            'is_active'
         ]));
         $product->save();
 

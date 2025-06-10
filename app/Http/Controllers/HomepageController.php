@@ -12,10 +12,11 @@ class HomepageController extends Controller
     {
         $categories = Categories::all();
         
-        return view('web.homepage',[
+        return view('web.home',[
             'categories' => $categories,
             'title'=>'Homepage'
         ]);
+        
     }
 
     public function products()
@@ -61,6 +62,13 @@ class HomepageController extends Controller
     {
         return view('web.checkout',[
             'title'=>'Checkout'
+        ]);
+    }
+
+    public function about()
+    {
+        return view('web.about',[
+            'title'=>'about'
         ]);
     }
 }

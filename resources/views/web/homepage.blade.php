@@ -1,7 +1,7 @@
 <x-layout>
 
     <div class="row">
-        <h3>Categories</h3>
+        <!-- <h3>Categories</h3> -->
         @foreach($categories as $category)
             <div class="col-2">
                 <div class="card" style="height:38vh">

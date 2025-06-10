@@ -5,35 +5,51 @@
         <flux:separator variant="subtle" />
     </div>
 
-    @if(session()->has('successMessage'))
-        <flux:badge color="lime" class="mb-3 w-full">{{ session('successMessage') }}</flux:badge>
-    @elseif(session()->has('errorMessage'))
-        <flux:badge color="red" class="mb-3 w-full">{{ session('errorMessage') }}</flux:badge>
+    @if (session('errorMessage'))
+        <div class="alert alert-danger">
+            {{ session('errorMessage') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
     @endif
 
     <form action="{{ route('products.store') }}" method="post">
         @csrf
-        
-        <flux:input label="Name" name="name" class="mb-3" />
 
-        <flux:input label="Slug" name="slug" class="mb-3" />
+        <flux:input label="Name" name="name" value="{{ old('name') }}" class="mb-3" />
 
-        <flux:textarea label="Description" name="description" class="mb-3" />
+        <flux:input label="Slug" name="slug" value="{{ old('slug') }}" class="mb-3" />
 
-        <flux:input label="SKU" name="sku" class="mb-3" />
+        <flux:textarea label="Description" name="description" class="mb-3">{{ old('description') }}</flux:textarea>
 
-        <flux:input label="Price" name="price" type="number" step="0.01" class="mb-3" />
+        <flux:input label="SKU" name="sku" value="{{ old('sku') }}" class="mb-3" />
 
-        <flux:input label="Stock" name="stock" type="number" class="mb-3" />
+        <flux:input label="Price" name="price" type="number" step="0.01" value="{{ old('price') }}" class="mb-3" />
 
-        <flux:input label="Image URL" name="image_url" class="mb-3" />
+        <flux:input label="Stock" name="stock" type="number" value="{{ old('stock') }}" class="mb-3" />
 
-        <flux:switch label="Active" name="is_active" class="mb-3" checked />
+        <!-- <flux:input label="Image URL" name="image_url" value="{{ old('image_url') }}" class="mb-3" /> -->
+
+        <flux:input type="file" label="Image URL" name="image_url" class="mb-3" />
+
+        {{-- Switch + hidden input to ensure boolean always sent --}}
+        <input type="hidden" name="is_active" value="0">
+        <flux:switch label="Active" name="is_active" value="true" :checked="old('is_active', true)" />
 
         <flux:select label="Category" name="product_category_id" class="mb-3">
             <option value="">-- Select Category --</option>
             @foreach($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                <option value="{{ $category->id }}" {{ old('product_category_id') == $category->id ? 'selected' : '' }}>
+                    {{ $category->name }}
+                </option>
             @endforeach
         </flux:select>
 
