@@ -6,36 +6,25 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\MenuController;
+use App\Http\Controllers\MenusController;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\ThemesController;
 
-// route untuk customer
-Route::group(['prefix' => 'customer'], function () {
+// Route untuk customer
+Route::prefix('customer')->group(function () {
     Route::controller(CustomerAuthController::class)->group(function () {
-        Route::group(['middleware' => 'check_customer_login'], function () {
-            //tampilkan halaman login 
+        Route::middleware('check_customer_login')->group(function () {
             Route::get('login', 'login')->name('customer.login');
-
-            //aksi login 
             Route::post('login', 'store_login')->name('customer.store_login');
-
-            //tampilkan halaman register 
             Route::get('register', 'register')->name('customer.register');
-
-            //aksi register 
             Route::post('register', 'store_register')->name('customer.store_register');
         });
 
-
-        //aksi logout 
         Route::post('logout', 'logout')->name('customer.logout');
-
     });
 });
 
-
-//kode baru diubah menjadi seperti ini
+// Route publik
 Route::get('/', [HomepageController::class, 'index'])->name('home');
 Route::get('products', [HomepageController::class, 'products']);
 Route::get('product/{slug}', [HomepageController::class, 'product']);
@@ -44,16 +33,15 @@ Route::get('category/{slug}', [HomepageController::class, 'category']);
 Route::get('cart', [HomepageController::class, 'cart']);
 Route::get('checkout', [HomepageController::class, 'checkout']);
 Route::get('about', [HomepageController::class, 'about']);
-// Route::get('/menu', [MenuController::class, 'menu'])->name('menu');
-// Route::get('/menu/category/{slug}', [MenuController::class, 'byCategory'])->name('menu.category');
-Route::get('/menu', [MenuController::class, 'index'])->name('menu'); // <--- nama ini penting!
-Route::get('/menu/category/{slug}', [MenuController::class, 'filterByCategory']);
 
+Route::get('/menu', [MenusController::class, 'index'])->name('menu');
+Route::get('/menu/category/{slug}', [MenusController::class, 'filterByCategory']);
 
-
-Route::group(['prefix' => 'dashboard'], function () {
+// Route dashboard
+Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', ProductCategoryController::class);
+<<<<<<< HEAD
     Route::get('/dashboard/products-alias', fn() => redirect()->route('products.index'))->name('products');
     Route::get('/dashboard/themes-alias', fn() => redirect()->route('themes.index'))->name('themes');
     Route::resource('products', ProductController::class);
@@ -62,10 +50,16 @@ Route::group(['prefix' => 'dashboard'], function () {
 
 })->middleware(['auth', 'verified']);
 
+=======
+    Route::get('products-alias', fn() => redirect()->route('products.index'))->name('products');
+    Route::resource('products', ProductController::class);
+    Route::resource('menus', MenusController::class);
+});
+>>>>>>> 48a4a0a77105f7f2f9cb511adf7fe6a3a0dc9636
 
+// Volt routes
 Route::middleware(['auth'])->group(function () {
     Route::redirect('settings', 'settings/profile');
-
     Volt::route('settings/profile', 'settings.profile')->name('settings.profile');
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
