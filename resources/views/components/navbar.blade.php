@@ -7,13 +7,13 @@
     </a>
 
     <!-- Toggler untuk mobile -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+      aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Isi navbar -->
-    <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+    <!-- Isi Navbar -->
+    <div class="collapse navbar-collapse" id="mainNavbar">
       <!-- Menu navigasi di tengah -->
       <ul class="navbar-nav mx-auto mb-3 mb-lg-0">
         <li class="nav-item mx-3">
@@ -25,19 +25,54 @@
         <li class="nav-item mx-3">
           <a class="nav-link {{ Request::is('menu') ? 'active' : '' }}" href="{{ url('/menu') }}">Menu</a>
         </li>
-      </ul>
-    </div>
+        <li class="nav-item mx-3">
+          <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{ url('/contact') }}">Contact</a>
+        </li>
 
-    <!-- Login icon di kanan -->
-    <div class="d-flex align-items-center me-3">
-      <a href="{{ route('login') }}" class="nav-link">
-        <i class="fas fa-user" style="color: #cccccc; font-size: 20px;"></i>
-      </a>
+        @auth('customer')
+        <li class="nav-item dropdown mx-3">
+          <a class="nav-link dropdown-toggle {{ Request::is('products') || Request::is('categories') || Request::is('orders') ? 'active' : '' }}"
+            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Manage
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/products">Product</a></li>
+            <li><a class="dropdown-item" href="/categories">Category</a></li>
+            <li><a class="dropdown-item" href="/orders">Orders</a></li>
+          </ul>
+        </li>
+        @endauth
+      </ul>
+
+      <!-- Bagian kanan (login / nama user) -->
+      <div class="d-flex align-items-center me-3">
+        @auth('customer')
+        <div class="dropdown">
+          <a class="btn btn-outline-light dropdown-toggle" href="#" role="button" id="userDropdown"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            {{ Auth::guard('customer')->user()->name }}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+            <li>
+              <form method="POST" action="{{ route('customer.logout') }}">
+                @csrf
+                <button class="dropdown-item" type="submit">Logout</button>
+              </form>
+            </li>
+          </ul>
+        </div>
+        @else
+        <a href="{{ route('customer.login') }}" class="nav-link">
+          <i class="fas fa-user" style="color: #cccccc; font-size: 20px;"></i>
+        </a>
+        @endauth
+      </div>
     </div>
   </div>
 </nav>
+
 <style>
-    .custom-navbar {
+  .custom-navbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -49,12 +84,11 @@
   }
 
   .custom-navbar.scrolled {
-    background-color: rgba(138, 47, 39, 0.95); /* warna saat scroll */
+    background-color: rgba(138, 47, 39, 0.95);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(10px);
   }
 
-  /* Gaya agar link navbar tetap terlihat */
   .custom-navbar .nav-link {
     color: #ccc !important;
     transition: color 0.3s ease;
@@ -64,14 +98,7 @@
     color: #fff !important;
     font-weight: bold;
   }
-
 </style>
-<!-- Tambahkan Font Awesome jika belum -->
-@push('styles')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-@endpush
-
 
 @push('scripts')
 <script>

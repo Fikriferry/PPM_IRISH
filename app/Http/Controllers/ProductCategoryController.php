@@ -19,7 +19,7 @@ class ProductCategoryController extends Controller
             })
             ->paginate(10);
 
-        return view('dashboard.categories.index', [
+        return view('web.categories.index', [
             'categories' => $categories,
             'q' => $request->q
         ]);
@@ -30,7 +30,7 @@ class ProductCategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.categories.create');
+        return view('web.categories.create');
     }
 
     /**
@@ -97,7 +97,7 @@ class ProductCategoryController extends Controller
     {
         $category = Categories::find($id);
 
-        return view('dashboard.categories.edit',[
+        return view('web.categories.edit',[
             'category'=>$category
         ]);
     }

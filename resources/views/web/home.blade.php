@@ -19,5 +19,10 @@
     @include('components.cerita')
 </section>
 
+<!-- GALLERY -->
+<section>
+    @include('components.galery')
+</section>
+
 
 @endsection

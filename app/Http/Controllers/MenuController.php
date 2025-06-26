@@ -8,11 +8,23 @@ class MenuController extends Controller
 {
     public function index()
     {
-        $categories = Categories::all();
+        // Ambil semua kategori beserta produk aktifnya
+        $categories = Categories::with([
+            'products' => function ($query) {
+                $query->where('is_active', true);
+            }
+        ])->get();
+
+        // Ambil semua produk aktif untuk tampilan default (All)
         $products = Product::where('is_active', true)->get();
 
-        return view('web.menu', compact('categories', 'products'));
+        // Flag untuk menandakan bahwa ini tampilan "All"
+        $isAll = true;
+
+        return view('web.menu', compact('categories', 'products', 'isAll'));
     }
+
+
 
     public function filterByCategory($slug)
     {
@@ -25,4 +37,3 @@ class MenuController extends Controller
         return response()->json(['products' => $view]);
     }
 }
-

@@ -71,4 +71,10 @@ class HomepageController extends Controller
             'title'=>'about'
         ]);
     }
+    public function contact()
+    {
+        return view('web.contact',[
+            'title'=>'Contact'
+        ]);
+    }
 }

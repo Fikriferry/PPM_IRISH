@@ -5,9 +5,13 @@
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img src="{{ asset('image/carousel-1.jpg') }}" class="d-block w-100" alt="Slide 1">
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.4);">
+            </div>
         </div>
         <div class="carousel-item">
             <img src="{{ asset('image/carousel-2.jpg') }}" class="d-block w-100" alt="Slide 2">
+            <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.4);">
+            </div>
         </div>
     </div>
 
@@ -17,10 +21,11 @@
             <div class="mb-3">
                 <img src="{{ asset('image/logo.jpg') }}" class="rounded-circle" width="150" alt="Logo">
             </div>
-            <h1 class="fw-bold">Selamat Datang di</h1>
+            <h1 class="fw-bold">Welcome to</h1>
             <p class="fs-5 mb-1">Irish Coffee & Bakehouse Tegal</p>
-            <h5 class="fw-bold">Lorem ipsum</h5>
-            <p class="small">Dapatkan diskon khusus, free kopi, dan special event khusus member.</p>
+            <h5 class="fw-bold">Tempat Nongkrong Rasa Rumah</h5>
+            <p class="small">Dapatkan pengalaman berbeda melalui kopi terbaik dan penawaran eksklusif untuk pelanggan
+                setia.</p>
         </div>
     </div>
 
@@ -36,28 +41,28 @@
 </div>
 
 @push('styles')
-<style>
-    .carousel-caption {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        z-index: 10;
-        padding: 0 15px;
-    }
+    <style>
+        .carousel-caption {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 10;
+            padding: 0 15px;
+        }
 
-    @media (max-width: 500px) {
-        .carousel-caption img {
-            width: 100px;
-        }
-        .carousel-caption h1 {
-            font-size: 1.8rem;
-        }
-        .carousel-caption .fs-5 {
-            font-size: 1rem;
-        }
-    }
+        @media (max-width: 500px) {
+            .carousel-caption img {
+                width: 100px;
+            }
 
-    
-</style>
+            .carousel-caption h1 {
+                font-size: 1.8rem;
+            }
+
+            .carousel-caption .fs-5 {
+                font-size: 1rem;
+            }
+        }
+    </style>
 @endpush

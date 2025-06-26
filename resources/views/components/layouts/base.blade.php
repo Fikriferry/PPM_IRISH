@@ -17,6 +17,25 @@
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&family=Roboto:wght@400;500;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css">
+
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+    </style>
 </head>
 
 <body style="background-color:#ffffff; color: #f4f1ee;">
@@ -24,9 +43,11 @@
         <header>
             @include('components.navbar')
         </header>
+
         <main>
             @yield('content')
         </main>
+
         <footer class="pt-5">
             @include('components.footer')
         </footer>
@@ -40,8 +61,7 @@
         $(document).ready(function () {
             $('#myTable').DataTable();
         });
-    </script>
-    <script>
+
         window.addEventListener('scroll', function () {
             const navbar = document.querySelector('.custom-navbar');
             if (window.scrollY > 70) {
@@ -51,8 +71,8 @@
             }
         });
     </script>
-@stack('scripts')
 
+    @stack('scripts')
 </body>
 
 </html>
