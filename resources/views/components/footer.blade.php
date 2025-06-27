@@ -14,8 +14,8 @@
 
         <div class="mb-3">
             <a href="{{ url('/') }}" class="text-white text-decoration-none mx-2">Home</a> |
-            <a href="{{ url('/product') }}" class="text-white text-decoration-none mx-2">Menu</a> |
             <a href="{{ url('/about') }}" class="text-white text-decoration-none mx-2">About Us</a> |
+            <a href="{{ url('/product') }}" class="text-white text-decoration-none mx-2">Menu</a> |
             <a href="{{ url('/contact') }}" class="text-white text-decoration-none mx-2">Contact</a>
         </div>
 

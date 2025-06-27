@@ -1,59 +1,48 @@
 <div class="container py-5">
-    <!-- Title -->
     <div class="text-center mb-5">
-        <h1>  </h1>
-        <p class="fw-semibold mb-3" style="font-family: Helvetica; color: #a83429;">
-            FROM THE BEST INDONESIAN SPECIALTY COFFEE TO HEART-WARMING FOODS
-        </p>
-        <h2 class="fw-bold fs-1 mt-4" style="color: rgb(171, 181, 185); font-family: 'Lucida Console';">
-            OUR MENU
-        </h2>
+        <p class="fw-semibold mb-3" style="font-family: Helvetica; color: #a83429;">FROM THE BEST TEGAL SPECIALTY COFFEE
+            TO HEART-WARMING FOODS</p>
+        <h2 class="fw-bold fs-1 mt-4" style="color: rgb(171, 181, 185); font-family: 'Lucida Console';">CATEGORY MENU</h2>
         <div class="mx-auto mt-4" style="height: 8px; width: 80px; background-color: #a83429;"></div>
     </div>
 
-    <!-- Menu Grid -->
-    <div class="row text-center g-4">
-        <!-- COFFE & NON-COFFE -->
-        <div class="col-md-3 menu-card">
-            <img src="{{ asset('image/menu-1.jpg') }}" class="img-fluid rounded" alt="Our Beans">
-            <h5 class="mt-3" style="color:#1a1a1a;">COFFE & NON-COFFE</h5>
-            <p class="small" style="color: #676767;">
-                Biji kopi grade Specialty Arabica dan Fine Robusta dari 9 perkebunan terbaik Indonesia.
-            </p>
-        </div>
+    <div id="menuCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @foreach($categories->chunk(4) as $chunkIndex => $chunk)
+                <div class="carousel-item {{ $chunkIndex === 0 ? 'active' : '' }}">
+                    <div class="row text-center g-4">
+                        @foreach($chunk as $category)
+                            <div class="col-md-3">
+                                <a href="{{ route('menu', $category->slug) }}" class="text-decoration-none">
+                                    <div class="menu-card" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
+                                        <img src="{{ asset('storage/' . $category->image) }}" class="img-fluid rounded"
+                                            alt="{{ $category->name }}">
+                                        <h5 class="mt-3" style="color:#1a1a1a;">{{ $category->name }}</h5>
+                                        <p class="small" style="color: #676767;">
+                                            {{ $category->description }}
+                                        </p>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
 
-        <!-- TEA & MOJITO SERIES -->
-        <div class="col-md-3 menu-card">
-            <img src="{{ asset('image/menu-2.jpg') }}" class="img-fluid rounded" alt="Coffee-Based Drinks">
-            <h5 class="mt-3" style="color:#1a1a1a;">TEA & MOJITO SERIES</h5>
-            <p class="small" style="color: #676767;">
-                Dari minuman tradisional berbasis espresso sampai berbagai minuman racikan kopi terkini.
-            </p>
-        </div>
 
-        <!-- RICE -->
-        <div class="col-md-3 menu-card">
-            <img src="{{ asset('image/menu-3.jpg') }}" class="img-fluid rounded" alt="Non-Coffee">
-            <h5 class="mt-3" style="color:#1a1a1a;">RICE</h5>
-            <p class="small" style="color: #676767;">
-                Kami juga memiliki menu non-coffee untuk kamu yang ingin pilihan lain selain kopi dan untuk anak-anak.
-            </p>
+                    </div>
+                </div>
+            @endforeach
         </div>
-
-        <!-- DESSERT -->
-        <div class="col-md-3 menu-card">
-            <img src="{{ asset('image/menu-4.jpg') }}" class="img-fluid rounded" alt="Food & Snack">
-            <h5 class="mt-3" style="color:#1a1a1a;">DESSERT</h5>
-            <p class="small" style="color: #676767;">
-                Berbagai macam makanan ringan sampai makanan utama siap menemani secangkir kopimu.
-            </p>
-        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#menuCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#menuCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
     </div>
 </div>
 
-
 <style>
-    /* Efek hover untuk card menu */
     .menu-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 8px 16px rgba(171, 52, 41, 0.2);
@@ -73,6 +62,6 @@
     }
 
     .menu-card:hover h5 {
-        color: #d4af37; 
+        color: #d4af37;
     }
 </style>

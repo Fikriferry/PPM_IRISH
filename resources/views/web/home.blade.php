@@ -9,6 +9,10 @@
     @include('components.carousel')
 </section>
 
+<section>
+        @include('components.facility')
+    </section>
+
 <!-- OUR MENU -->
 <section>
     @include('components.our_menu')

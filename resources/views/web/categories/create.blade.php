@@ -32,6 +32,16 @@
                 </div>
             @endif
 
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form action="{{ route('categories.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
 
@@ -44,7 +54,7 @@
                 <!-- Slug -->
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug</label>
-                    <input type="text" name="slug" id="slug" class="form-control" required>
+                    <input type="text" name="slug" id="slug" class="form-control" readonly>
                 </div>
 
                 <!-- Description -->
@@ -76,4 +86,26 @@
 
 <!-- FontAwesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const nameInput = document.getElementById('name');
+        const slugInput = document.getElementById('slug');
+
+        nameInput.addEventListener('input', function () {
+            const slug = nameInput.value
+                .toLowerCase()
+                .replace(/[^\w\s]/g, '')  // hilangkan simbol
+                .replace(/\s+/g, '-');     // ganti spasi dengan -
+            slugInput.value = slug;
+        });
+
+        if (nameInput.value) {
+            const event = new Event('input');
+            nameInput.dispatchEvent(event);
+        }
+    });
+</script>
+@endpush
 @endsection

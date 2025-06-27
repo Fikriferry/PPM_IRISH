@@ -11,24 +11,26 @@ class HomepageController extends Controller
     public function index()
     {
         $categories = Categories::all();
-        
-        return view('web.home',[
+
+        return view('web.home', [
             'categories' => $categories,
-            'title'=>'Homepage'
+            
+            'title' => 'Homepage'
         ]);
-        
+
     }
 
     public function products()
     {
         $title = "Products";
 
-        return view('web.products',[
-            'title'=>$title
+        return view('web.products', [
+            'title' => $title
         ]);
     }
 
-    public function product($slug){
+    public function product($slug)
+    {
         return view('web.product', [
             'slug' => $slug
         ]);
@@ -36,8 +38,8 @@ class HomepageController extends Controller
 
     public function categories()
     {
-        return view('web.categories',[
-            'title'=>'Categories'
+        return view('web.categories', [
+            'title' => 'Categories'
         ]);
     }
 
@@ -46,35 +48,35 @@ class HomepageController extends Controller
         $category = Categories::find($slug);
 
         return view('web.category_by_slug', [
-            'slug' => $slug, 
+            'slug' => $slug,
             'category' => $category
         ]);
     }
 
     public function cart()
     {
-        return view('web.cart',[
-            'title'=>'Cart'
+        return view('web.cart', [
+            'title' => 'Cart'
         ]);
     }
 
     public function checkout()
     {
-        return view('web.checkout',[
-            'title'=>'Checkout'
+        return view('web.checkout', [
+            'title' => 'Checkout'
         ]);
     }
 
     public function about()
     {
-        return view('web.about',[
-            'title'=>'about'
+        return view('web.about', [
+            'title' => 'about'
         ]);
     }
     public function contact()
     {
-        return view('web.contact',[
-            'title'=>'Contact'
+        return view('web.contact', [
+            'title' => 'Contact'
         ]);
     }
 }

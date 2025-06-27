@@ -20,23 +20,22 @@
         <div class="container">
             <div class="mb-5">
                 <h2 class="fw-bold fs-1 mt-4" style="color: rgb(171, 181, 185); font-family: 'Lucida Console';">
-                    OUR STORY
+                    TENTANG KAMI
                 </h2>
                 <div class="mt-4" style="height: 10px; width: 80px; background-color: #a83429;"></div>
             </div>
 
             <div class="row gy-4">
                 <div class="col-md-6">
-                    <p>Coffee shop yang nyaman dan kekinian di Tegal, menghadirkan beragam dessert lezat, hidangan nasi
-                        hangat, dan kopi berkualitas untuk menemani waktu santaimu. Kami buka setiap hari mulai sore
-                        hingga tengah malam, siap jadi tempat andalanmu untuk bersantai maupun merayakan momen spesial.
-                    </p>
-                    <p>We know, and so do you, that the world's best coffee beans come from Indonesia. We travel to
-                        various corners of Indonesia and work with local coffee farmers and roasters to get the best
-                        taste of Indonesian coffee, grade one Arabica beans and various plantations spread across the
-                        archipelago.</p>
-                    <p>With our experience and knowledge in the retail coffee industry, from coffee bean processing to
-                        how to design a coffee bar, we make your coffee business journey EASY, SIMPLE, and FUN!</p>
+                    <p>Berlokasi di sebuah gang sempit di Tegal, kedai kopi kami hadir dengan konsep hangat dan
+                        sederhana. Menyajikan kopi asli Nusantara, dessert lezat, hingga makanan rumahan yang siap
+                        menemani waktu santaimu.</p>
+                    <p>Kami percaya bahwa biji kopi terbaik datang dari para petani lokal. Dengan bekerja sama langsung
+                        bersama petani dan roaster, kami menghadirkan cita rasa otentik kopi Indonesia di setiap
+                        cangkirnya, dari Arabica grade satu hingga racikan manual brew tradisional.</p>
+                    <p>Tempat kami bukan sekadar cafe, tetapi menjadi ruang cerita dan temu warga sekitar, menciptakan
+                        suasana akrab dan bersahabat. Kami selalu terbuka untuk siapa saja yang ingin berbagi cerita —
+                        di gang kecil ini, kamu akan menemukan rasa pulang.</p>
                 </div>
 
                 <!-- Image & Opening Hours Section -->
@@ -70,8 +69,6 @@
 
 @push('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 @endpush
-
 
 @endsection

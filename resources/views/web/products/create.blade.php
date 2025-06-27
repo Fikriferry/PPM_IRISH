@@ -54,7 +54,7 @@
                 <!-- Slug -->
                 <div class="mb-3">
                     <label for="slug" class="form-label">Slug</label>
-                    <input type="text" name="slug" id="slug" class="form-control" value="{{ old('slug') }}" required>
+                    <input type="text" name="slug" id="slug" class="form-control" readonly>
                 </div>
 
                 <!-- Description -->
@@ -66,7 +66,7 @@
                 <!-- SKU -->
                 <div class="mb-3">
                     <label for="sku" class="form-label">SKU</label>
-                    <input type="text" name="sku" id="sku" class="form-control" value="{{ old('sku') }}">
+                    <input type="text" name="sku" id="sku" class="form-control" readonly>
                 </div>
 
                 <!-- Price -->
@@ -126,4 +126,39 @@
 
 <!-- FontAwesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const nameInput = document.getElementById('name');
+        const slugInput = document.getElementById('slug');
+        const skuInput = document.getElementById('sku');
+
+        function generateSKU() {
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = ('0' + (date.getMonth() + 1)).slice(-2);
+            const random = Math.floor(100 + Math.random() * 900); // 3 digit random
+            return `IRISH-${year}${month}-${random}`;
+        }
+
+        nameInput.addEventListener('input', function () {
+            const slug = nameInput.value
+                .toLowerCase()
+                .replace(/[^\w\s]/g, '')
+                .replace(/\s+/g, '-');
+            slugInput.value = slug;
+
+            skuInput.value = generateSKU();
+        });
+
+        // trigger kalau sudah ada value bawaan
+        if (nameInput.value) {
+            const event = new Event('input');
+            nameInput.dispatchEvent(event);
+        }
+    });
+</script>
+@endpush
+
 @endsection
