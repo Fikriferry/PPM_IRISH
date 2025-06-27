@@ -9,19 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('order_items', function (Blueprint $table) {
+        Schema::create('galleries', function (Blueprint $table) {
             $table->id();
+            $table->string('image_path');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_items');
+        Schema::dropIfExists('galleries');
     }
 };

@@ -1,23 +1,25 @@
 <!-- Bootstrap Icons -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
-<div id="carouselExample" class="carousel slide position-relative" data-bs-ride="carousel" data-bs-interval="3000">
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="{{ asset('image/carousel-1.jpg') }}" class="d-block w-100" alt="Slide 1">
-            <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.4);">
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('image/carousel-2.jpg') }}" class="d-block w-100" alt="Slide 2">
-            <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.4);">
-            </div>
+@if($carouselImages->count())
+    <div id="carouselExample" class="carousel slide position-relative" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-inner">
+            @foreach ($carouselImages as $key => $item)
+                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                    <img src="{{ asset('storage/' . $item->image_path) }}" class="d-block"
+                        style="width: 100%; height: 1000px; object-fit: cover; object-position: center;" alt="Carousel Image">
+                    
+                    <!-- Overlay gelap -->
+                    <div class="position-absolute top-0 start-0 w-100 h-100" style="background-color: rgba(0, 0, 0, 0.6);">
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 
     <!-- Overlay Konten -->
     <div class="carousel-caption d-flex flex-column justify-content-center align-items-center h-100">
-        <div class=" bg-opacity-10 p-4 rounded text-white text-center">
+        <div class="bg-opacity-10 p-4 rounded text-white text-center">
             <div class="mb-3">
                 <img src="{{ asset('image/logo.jpg') }}" class="rounded-circle" width="150" alt="Logo">
             </div>
@@ -38,31 +40,53 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
     </button>
-</div>
+    </div>
+@else
+    <p class="text-center my-5 text-muted">Tidak ada gambar aktif untuk ditampilkan di carousel.</p>
+@endif
 
-@push('styles')
-    <style>
-        .carousel-caption {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 10;
-            padding: 0 15px;
+<style>
+    /* Efek zoom+rotate untuk gambar carousel */
+    .carousel-item img {
+        transform: scale(1.1) rotate(-1deg);
+        opacity: 0.7;
+        transition: all 1.2s ease-in-out;
+    }
+
+    .carousel-item.active img {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+
+    /* Teks animasi masuk satu per satu */
+    .carousel-caption h1,
+    .carousel-caption p,
+    .carousel-caption h5 {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: slideFadeIn 1s ease forwards;
+    }
+
+    .carousel-caption h1 { animation-delay: 0.5s; }
+    .carousel-caption p { animation-delay: 1s; }
+    .carousel-caption h5 { animation-delay: 1.5s; }
+
+    @keyframes slideFadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
         }
+    }
 
-        @media (max-width: 500px) {
-            .carousel-caption img {
-                width: 100px;
-            }
+    /* Efek glow hover untuk logo */
+    .carousel-caption img:hover {
+        box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+        transform: scale(1.1) rotate(1deg);
+        transition: all 0.4s ease-in-out;
+    }
 
-            .carousel-caption h1 {
-                font-size: 1.8rem;
-            }
-
-            .carousel-caption .fs-5 {
-                font-size: 1rem;
-            }
-        }
-    </style>
-@endpush
+    .carousel-caption > div {
+        padding: 20px;
+        border-radius: 12px;
+    }
+</style>

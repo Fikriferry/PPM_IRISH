@@ -20,7 +20,7 @@
         <div class="container">
             <div class="mb-5">
                 <h2 class="fw-bold fs-1 mt-4" style="color: rgb(171, 181, 185); font-family: 'Lucida Console';">
-                    TENTANG KAMI
+                    ABOUT US
                 </h2>
                 <div class="mt-4" style="height: 10px; width: 80px; background-color: #a83429;"></div>
             </div>
@@ -34,20 +34,22 @@
                         bersama petani dan roaster, kami menghadirkan cita rasa otentik kopi Indonesia di setiap
                         cangkirnya, dari Arabica grade satu hingga racikan manual brew tradisional.</p>
                     <p>Tempat kami bukan sekadar cafe, tetapi menjadi ruang cerita dan temu warga sekitar, menciptakan
-                        suasana akrab dan bersahabat. Kami selalu terbuka untuk siapa saja yang ingin berbagi cerita —
-                        di gang kecil ini, kamu akan menemukan rasa pulang.</p>
+                        suasana akrab dan bersahabat. Kami selalu terbuka untuk siapa saja yang ingin berbagi cerita — di gang kecil ini, kamu akan menemukan rasa pulang.</p>
                 </div>
 
                 <!-- Image & Opening Hours Section -->
                 <div class="col-md-6">
-                    <!-- Main image -->
-                    <img src="{{ asset('image/about-1.jpg') }}" alt="Coffee Shop"
-                        class="img-fluid mb-4 rounded" style="max-width: 100%; height: auto; max-height: 250px;" />
+                    @if($aboutImages->get(0))
+                        <img src="{{ asset('storage/' . $aboutImages->get(0)->image_path) }}" alt="Coffee Shop"
+                            class="img-fluid mb-4 rounded" style="max-width: 100%; height: auto; max-height: 250px;" />
+                    @endif
 
                     <div class="row">
                         <div class="col-5">
-                            <img src="{{ asset('image/about-2.jpg') }}" alt="Barista at Work"
-                                class="img-fluid rounded" style="max-width: 100%; height: auto; max-height: 220px;" />
+                            @if($aboutImages->get(1))
+                                <img src="{{ asset('storage/' . $aboutImages->get(1)->image_path) }}" alt="Barista at Work"
+                                    class="img-fluid rounded" style="max-width: 100%; height: auto; max-height: 220px;" />
+                            @endif
                         </div>
                         <div class="col-7">
                             <div class="box-white" style="height: 100%; padding: 15px; font-size: 0.9rem;">
@@ -60,6 +62,7 @@
             </div>
         </div>
     </div>
+
 </section>
 
 <!-- Facility Section -->
@@ -68,11 +71,7 @@
 </section>
 
 @push('styles')
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 @endpush
 
-<<<<<<< Updated upstream
 @endsection
-=======
-@endsection
->>>>>>> Stashed changes

@@ -17,16 +17,16 @@
       <!-- Menu navigasi di tengah -->
       <ul class="navbar-nav mx-auto mb-3 mb-lg-0">
         <li class="nav-item mx-3">
-          <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
+          <a class="nav-link {{ Request::is('/') ? 'active' : '' }}" href="/">Home</a>
         </li>
         <li class="nav-item mx-3">
-          <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="{{ url('/about') }}">About</a>
+          <a class="nav-link {{ Request::is('about') ? 'active' : '' }}" href="/about">About</a>
         </li>
         <li class="nav-item mx-3">
-          <a class="nav-link {{ Request::is('menu') ? 'active' : '' }}" href="{{ url('/menu') }}">Menu</a>
+          <a class="nav-link {{ Request::is('menu') ? 'active' : '' }}" href="/menu">Menu</a>
         </li>
         <li class="nav-item mx-3">
-          <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="{{ url('/contact') }}">Contact</a>
+          <a class="nav-link {{ Request::is('contact') ? 'active' : '' }}" href="/contact">Contact</a>
         </li>
 
         @auth('customer')
@@ -39,6 +39,7 @@
             <li><a class="dropdown-item" href="/products">Product</a></li>
             <li><a class="dropdown-item" href="/categories">Category</a></li>
             <li><a class="dropdown-item" href="/orders">Orders</a></li>
+            <li><a class="dropdown-item" href="/galleries">Gallery</a></li>
           </ul>
         </li>
         @endauth

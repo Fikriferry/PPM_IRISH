@@ -1,12 +1,10 @@
 @if(isset($isAll) && $isAll)
     @foreach($categories as $category)
         @if($category->products->isNotEmpty())
-            <!-- Judul Kategori -->
             <h5 id="category-{{ Str::slug($category->name) }}" class="mt-5 mb-3 fw-bold">{{ $category->name }}</h5>
-
             <div class="row g-4">
-                @foreach($category->products as $product)
-                    <div class="col-lg-3 col-md-6 col-12">
+                @foreach($category->products as $i => $product)
+                    <div class="col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
                         <div class="card h-100 border-0 shadow-sm rounded overflow-hidden">
                             <div class="d-flex" style="height: 160px;">
                                 <div class="flex-shrink-0">
@@ -51,28 +49,22 @@
     @endforeach
 @else
     @php
-        // Ambil kategori dari produk pertama (karena semua produk sudah difilter berdasarkan 1 kategori)
         $selectedCategory = $products->first()?->category ?? null;
     @endphp
 
     @if($selectedCategory)
-        <!-- Judul Kategori -->
         <h5 id="category-{{ Str::slug($selectedCategory->name) }}" class="mt-5 mb-3 fw-bold">{{ $selectedCategory->name }}</h5>
     @endif
 
-    <!-- Produk dalam kategori -->
     <div class="row g-4">
-        @forelse($products as $product)
-            <div class="col-lg-3 col-md-6 col-12">
+        @forelse($products as $i => $product)
+            <div class="col-lg-3 col-md-6 col-12" data-aos="fade-up" data-aos-delay="{{ $i * 100 }}">
                 <div class="card h-100 border-0 shadow-sm rounded overflow-hidden">
                     <div class="d-flex" style="height: 160px;">
-                        <!-- Gambar Kiri -->
                         <div class="flex-shrink-0">
                             <img src="{{ Storage::url($product->image_url) }}" alt="{{ $product->name }}"
                                 class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
                         </div>
-
-                        <!-- Info Produk Kanan -->
                         <div class="p-3 d-flex flex-column justify-content-between">
                             <div>
                                 <h6 class="fw-bold mb-1">{{ $product->name }}</h6>

@@ -63,4 +63,8 @@
     duration: 1000,
     once: true
   });
+<<<<<<< Updated upstream
 </script>
+=======
+</script>
+>>>>>>> Stashed changes
