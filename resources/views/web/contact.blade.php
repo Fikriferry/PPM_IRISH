@@ -41,7 +41,7 @@
                         <h6 class="fw-bold mb-3"><i class="fas fa-map-marker-alt text-danger me-2"></i>IRISH Coffe</h6>
                         <p><strong>TEGAL</strong><br>
                             Jl. Cendrawasih No.97, Randugunting, Kec. Tegal Sel., Kota Tegal, Jawa Tengah 52131<br>
-                            Telp. (+62) 895-3773-27233
+                            Telp. (+62) 852-9313-7932
                         </p>
                     </div>
 
@@ -68,12 +68,12 @@
                     <div class="col-6 col-md-3" data-aos="fade-up">
                         <i class="fas fa-envelope fa-2x text-danger"></i>
                         <p class="mt-2 mb-1">EMAIL</p>
-                        <small class="text-danger">IrishCoffe@gmail.com</small>
+                        <small class="text-danger">irish.landgrp@gmail.com</small>
                     </div>
                     <div class="col-6 col-md-3" data-aos="fade-up-left">
                         <i class="fab fa-whatsapp fa-2x text-danger"></i>
                         <p class="mt-2 mb-1">WHATSAPP</p>
-                        <small class="text-danger">895377327233</small>
+                        <small class="text-danger">+62 852-9313-7932</small>
                     </div>
                 </div>
             </div>

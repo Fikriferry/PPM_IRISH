@@ -40,6 +40,7 @@
             <li><a class="dropdown-item" href="/categories">Category</a></li>
             <li><a class="dropdown-item" href="/orders">Orders</a></li>
             <li><a class="dropdown-item" href="/galleries">Gallery</a></li>
+            <li><a class="dropdown-item" href="/user">User</a></li>
           </ul>
         </li>
         @endauth

@@ -57,8 +57,7 @@
                     </button>
                     <div class="mt-3 text-center">
                         <small class="text-muted">
-                            Belum punya akun?
-                            <a href="{{ route('customer.register') }}" style="color: #d4af37;">Daftar disini</a>
+                            <a href="{{ route('home') }}" style="color: #d4af37;">Kembali ke Home</a>
                         </small>
                     </div>
                 </form>

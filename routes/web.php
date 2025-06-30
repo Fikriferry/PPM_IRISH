@@ -9,6 +9,7 @@ use App\Http\Controllers\MenuController;
 use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\CustomerController;
 
 // Route untuk customer
 Route::prefix('customer')->group(function () {
@@ -36,6 +37,7 @@ Route::get('contact', [HomepageController::class, 'contact']);
 Route::resource('categories', ProductCategoryController::class);
 Route::resource('product', ProductController::class);
 Route::resource('orders', OrderController::class);
+Route::resource('user', CustomerController::class);
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::get('/menu/category/{slug}', [MenuController::class, 'filterByCategory']);
 Route::resource('galleries', GalleryController::class);
