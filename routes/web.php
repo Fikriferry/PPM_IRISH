@@ -25,6 +25,10 @@ Route::prefix('customer')->group(function () {
     });
 });
 
+use App\Http\Controllers\OrderExportController;
+
+Route::get('/orders/export', [OrderExportController::class, 'export'])->name('orders.export');
+
 // Route publik
 Route::get('/', [HomepageController::class, 'index'])->name('home');
 Route::get('products', [HomepageController::class, 'products']);
@@ -70,5 +74,7 @@ Route::middleware(['auth'])->group(function () {
     Volt::route('settings/password', 'settings.password')->name('settings.password');
     Volt::route('settings/appearance', 'settings.appearance')->name('settings.appearance');
 });
+
+
 
 require __DIR__ . '/auth.php';

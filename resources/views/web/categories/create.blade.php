@@ -6,7 +6,7 @@
 <section>
     <!-- Hero Section -->
     <div class="hero-section"
-        style="background-color:rgba(138, 47, 39, 0.95); color: #ffffff; padding: 80px 0 30px; text-align: center;">
+        style="background: linear-gradient(to right, rgba(138, 47, 39, 0.9), rgba(33, 18, 12, 0.9)), url('{{ asset('image/bg-1.jpg') }}') center/cover no-repeat; color: #ffffff; padding: 100px 0 40px; text-align: center;">
         <h1>
             <span style="color: #f8a42f; font-size: 3rem; font-weight: bold;">ADD</span> CATEGORY
         </h1>

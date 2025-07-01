@@ -15,11 +15,39 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::with(['items.product'])->latest()->paginate(10); // 10 bisa diganti jumlah per halaman yang diinginkan
-        return view('web.orders.index', compact('orders'));
+        // Ambil semua produk aktif untuk dropdown filter menu
+        $productList = Product::where('is_active', true)->orderBy('name')->get();
+
+        // Mulai query orders dengan relasi items dan produk di-load
+        $query = Order::with(['items.product', 'waiter']);
+
+        // Filter berdasarkan tanggal awal (start_date)
+        if ($request->filled('start_date')) {
+            $query->whereDate('created_at', '>=', $request->start_date);
+        }
+
+        // Filter berdasarkan tanggal akhir (end_date)
+        if ($request->filled('end_date')) {
+            $query->whereDate('created_at', '<=', $request->end_date);
+        }
+
+        // Filter berdasarkan nama produk (menu)
+        if ($request->filled('menu')) {
+            $query->whereHas('items.product', function ($q) use ($request) {
+                $q->where('name', $request->menu);
+            });
+        }
+
+        // Ambil hasil query dengan pagination
+        $orders = $query->latest()->paginate(10);
+
+        // Kirim data ke view
+        return view('web.orders.index', compact('orders', 'productList'));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
