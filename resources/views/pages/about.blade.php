@@ -7,7 +7,8 @@
 <section>
     <!-- Hero Section -->
     <div class="hero-section"
-        style="background-color:rgba(138, 47, 39, 0.95); color: #ffffff; padding: 100px 0 40px; text-align: center; background: linear-gradient(to right, rgba(138, 47, 39, 0.9), rgba(33, 18, 12, 0.9)), url('{{ asset('image/bg-1.jpg') }}') center/cover no-repeat;">
+        style="background-color:rgba(138, 47, 39, 0.95); color: #ffffff; padding: 100px 0 40px; text-align: center; background: linear-gradient(to right, rgba(138, 47, 39, 0.9), rgba(33, 18, 12, 0.9)), url('{{ asset('image/bg-1.jpg') }}') center/cover no-repeat;"
+        data-aos="fade-down">
         <h1><span style="color: #f8a42f; font-size: 3rem; font-weight: bold;">ABOUT</span> US</h1>
         <nav class="breadcrumb" style="background: none; justify-content: center; margin-top: 10px;">
             <a class="breadcrumb-item text-light text-decoration-none" href="{{ url('/') }}">Home</a>
@@ -16,7 +17,7 @@
     </div>
 
     <!-- Our Story Section -->
-    <div class="story-section text-dark" style="background-color: #ffffff; padding: 40px 20px;">
+    <div class="story-section text-dark" style="background-color: #ffffff; padding: 40px 20px;" data-aos="fade-up">
         <div class="container">
             <div class="mb-5">
                 <h2 class="fw-bold fs-1 mt-4" style="color: rgb(171, 181, 185); font-family: 'Lucida Console';">
@@ -34,7 +35,8 @@
                         bersama petani dan roaster, kami menghadirkan cita rasa otentik kopi Indonesia di setiap
                         cangkirnya, dari Arabica grade satu hingga racikan manual brew tradisional.</p>
                     <p>Tempat kami bukan sekadar cafe, tetapi menjadi ruang cerita dan temu warga sekitar, menciptakan
-                        suasana akrab dan bersahabat. Kami selalu terbuka untuk siapa saja yang ingin berbagi cerita — di gang kecil ini, kamu akan menemukan rasa pulang.</p>
+                        suasana akrab dan bersahabat. Kami selalu terbuka untuk siapa saja yang ingin berbagi cerita —
+                        di gang kecil ini, kamu akan menemukan rasa pulang.</p>
                 </div>
 
                 <!-- Image & Opening Hours Section -->
@@ -66,12 +68,24 @@
 </section>
 
 <!-- Facility Section -->
-<section>
+<section data-aos="fade-up">
     @include('components.facility')
 </section>
 
 @push('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+@endpush
+
+@push('scripts')
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1200,
+            once: true,
+            easing: 'ease-in-out'
+        });
+    </script>
 @endpush
 
 @endsection

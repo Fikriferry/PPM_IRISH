@@ -39,9 +39,9 @@
             </ul>
 
             <!-- Product Grid -->
-            <div id="productContainer" data-aos="fade-up" data-aos-delay="200">
-                @include('web.products', ['products' => $products])
-            </div>
+            <div id="productContainer">
+            @include('pages.products', ['products' => $products, 'isAll' => true])
+        </div>
         </div>
     </div>
 </section>

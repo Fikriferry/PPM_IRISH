@@ -44,6 +44,7 @@ Route::resource('orders', OrderController::class);
 Route::resource('user', CustomerController::class);
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::get('/menu/category/{slug}', [MenuController::class, 'filterByCategory']);
+Route::get('/menu/all', [MenuController::class, 'allProductsPartial'])->name('menu.all');
 Route::resource('galleries', GalleryController::class);
 Route::put('/galleries/{id}/toggle', [GalleryController::class, 'toggleStatus'])->name('galleries.toggle');
 
